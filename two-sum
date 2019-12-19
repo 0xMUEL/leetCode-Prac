@@ -1,0 +1,37 @@
+/**
+ * Runtime: 3 ms, faster than 50.14% of Java online submissions for Two Sum. 
+ * Memory Usage: 37 MB, less than 99.08% of Java online submissions for Two Sum.
+ *
+**/
+
+import java.util.HashMap;
+
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] indices = {-1,-1};
+
+        class pair{
+            int value;
+            int index;
+            pair(int value,int index){
+                this.index = index;
+                this.value = value;
+            }
+        }
+
+        HashMap<String,pair> table = new HashMap();
+        int need = 0;
+        for(int i = 0; i < nums.length; i++){
+            need = target - nums[i];
+            if(table.containsKey(String.valueOf(need))){//get the value pair
+                indices[0] = table.get(String.valueOf(need)).index;
+                indices[1] = i;
+                break;
+            }else{//insert the value pair into the table
+                table.put(String.valueOf(nums[i]),new pair(nums[i],i));
+            }
+        }
+
+        return indices;
+    }
+}
